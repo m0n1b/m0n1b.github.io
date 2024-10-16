@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="hexo自动化踩坑坑一: submodule hexo自动安装的时候并不会给设置  甚至 git add -f的时候也不会提提交 所以使用自定义模板的时候  记得先删掉模板  git commit之后再去 git submodule add https:&#x2F;&#x2F;github.com&#x2F;probberechts&#x2F;hexo-theme-cactus.git themes&#x2F;cactus  然后在 git co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo自动化踩坑">
+<meta property="og:url" content="http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="hexo自动化踩坑坑一: submodule hexo自动安装的时候并不会给设置  甚至 git add -f的时候也不会提提交 所以使用自定义模板的时候  记得先删掉模板  git commit之后再去 git submodule add https:&#x2F;&#x2F;github.com&#x2F;probberechts&#x2F;hexo-theme-cactus.git themes&#x2F;cactus  然后在 git co">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-08-28T14:28:16.183Z">
+<meta property="article:modified_time" content="2024-08-28T14:41:48.501Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>hexo自动化踩坑</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/08/28/2024-8-28/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&text=hexo自动化踩坑"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&is_video=false&description=hexo自动化踩坑"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=hexo自动化踩坑&body=Check out this article: http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&name=hexo自动化踩坑&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&t=hexo自动化踩坑"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91"><span class="toc-number">1.</span> <span class="toc-text">hexo自动化踩坑</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        hexo自动化踩坑
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-08-28T14:28:16.183Z" class="dt-published" itemprop="datePublished">2024-08-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/hexo/">hexo</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/hexo/" rel="tag">hexo</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="hexo自动化踩坑"><a href="#hexo自动化踩坑" class="headerlink" title="hexo自动化踩坑"></a>hexo自动化踩坑</h1><p><strong>坑一:</strong></p>
+<p>submodule hexo自动安装的时候并不会给设置  甚至 git add -f的时候也不会提提交 所以使用自定义模板的时候  记得先删掉模板  git commit之后再去</p>
+<p><code>git submodule add https://github.com/probberechts/hexo-theme-cactus.git themes/cactus </code></p>
+<p>然后在 git commit   才能够触发 github-cil的拉取子项目</p>
+<p><strong>坑二:</strong></p>
+<p>hexo -d  如果是一个私有一个公有的话    使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: git@github.com:xxxx</span><br><span class="line">branch: main</span><br><span class="line">token: &#x27;xxxx&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>并不会使用token的  反而要自己拉一个私钥过去  才能正常提交</p>
+<p><strong>最后贴出完整的ci代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">name: Pageson:</span><br><span class="line">push:</span><br><span class="line">branches:master # default branchjobs:</span><br><span class="line">build:</span><br><span class="line">runs-on: ubuntu-latest</span><br><span class="line">steps:uses: actions/checkout@v4</span><br><span class="line">with:</span><br><span class="line">token: $&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125;name: Use Node.js 18.12.0</span><br><span class="line">uses: actions/setup-node@v4</span><br><span class="line">with:</span><br><span class="line">node-version: &quot;18.12.0&quot;name: Cache NPM dependencies</span><br><span class="line">uses: actions/cache@v4</span><br><span class="line">with:</span><br><span class="line">path: node_modules</span><br><span class="line">key: $&#123;&#123; runner.OS &#125;&#125;-node-runner.OS−node−runner.OS−node−runner.OS−node−$&#123;&#123; hashFiles(&#x27;**/package-lock.json&#x27;) &#125;&#125;</span><br><span class="line">restore-keys: |</span><br><span class="line">$&#123;&#123; runner.OS &#125;&#125;-node-name: Set up SSH key</span><br><span class="line">run: |</span><br><span class="line">mkdir -p ~/.ssh</span><br><span class="line">echo &quot;$&#123;&#123; secrets.DEPLOY_KEY &#125;&#125;&quot; &gt; ~/.ssh/id_rsa</span><br><span class="line">chmod 600 ~/.ssh/id_rsa</span><br><span class="line">ssh-keyscan -t rsa github.com &gt;&gt; ~/.ssh/known_hosts</span><br><span class="line">env:</span><br><span class="line">DEPLOY_KEY: $&#123;&#123; secrets.DEPLOY_KEY &#125;&#125;name: Install Dependencies</span><br><span class="line">run: npm installname: Initialize and Update Submodules</span><br><span class="line">run: |</span><br><span class="line">git submodule update --init --recursive ./themes/cactusname: Install hexo-blog-encrypt</span><br><span class="line">run: npm install hexo-blog-encrypt --savename: Install Dependencies</span><br><span class="line">run: npm install hexoname: Install Hexo</span><br><span class="line">run: npm install -g hexo-cliname: Run Hexo Commands</span><br><span class="line">run: hexo gname: Run Hexo Commands</span><br><span class="line">run: hexo d</span><br></pre></td></tr></table></figure>
+
+<p>上述代码要先把  node_modules  git add -f进去才有用</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91"><span class="toc-number">1.</span> <span class="toc-text">hexo自动化踩坑</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&text=hexo自动化踩坑"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&is_video=false&description=hexo自动化踩坑"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=hexo自动化踩坑&body=Check out this article: http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&title=hexo自动化踩坑"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&name=hexo自动化踩坑&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/08/28/hexo%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B8%A9%E5%9D%91/&t=hexo自动化踩坑"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2024
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
